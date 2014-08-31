@@ -1,0 +1,239 @@
+%
+% Portuguese-BR vertion
+% 
+\documentclass{article}
+
+\usepackage{ipprocess}
+% Use longtable if you want big tables to split over multiple pages.
+% \usepackage{longtable}
+\usepackage[utf8]{inputenc} 
+% Babel package is used to translate keywors to a specific language. 
+% The option "brazil" defines portuguese-brazil as default language.
+% Babel is also useful for hiphenation.
+\usepackage[brazil]{babel}
+
+\sloppy
+
+\graphicspath{{./pictures/}} % Pictures dir
+\makeindex
+\begin{document}
+
+\DocumentTitle{Especificação de Requisitos}
+\Project{Unidade de Operações Aritméticas}
+\Organization{Universidade Estadual de Feira de Santana}
+\Version{Compilação 1.0}
+\capa
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Revision History
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{\center Histórico de Revisões}
+  \vspace*{1cm}
+  \begin{table}[ht]
+    \centering
+    \begin{tabular}[pos]{|m{2cm} | m{7.2cm} | m{3.8cm}|} 
+      \hline
+      \cellcolor[gray]{0.9}
+      \textbf{Data} & \cellcolor[gray]{0.9}\textbf{Descrição} & \cellcolor[gray]{0.9}\textbf{Autor(s)}\\ \hline
+      \hline
+      \small 11/08/2014 & \small Concepção do documento & \small joaocarlos \\ \hline      
+      \small 12/08/2014 &
+      \begin{small}
+        \begin{itemize}
+          \item Inclusão do requisito [FR2.12];
+          \item Substituição do requisito [FR2.22];
+          \item Remoção do requisito [FR2.43];
+          \item Inclusão do requisito [NFR1];
+        \end{itemize}
+      \end{small} & \small joaocarlos e x-afn \\ \hline 
+      \small 18/08/2014 & \small Atualização do modelo & \small joaocarlos \\ \hline       
+    \end{tabular}
+  \end{table}
+
+\newpage
+
+% TOC instantiation
+\tableofcontents
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Document main content
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introdução}
+
+\subsection{Visão Geral do Documento}
+  \begin{itemize}
+   \item \textbf{Requisitos funcionais -} lista de todos os requisitos funcionais.
+   \item \textbf{Requisitos não funcionais -} lista de todos os requisitos não funcionais.
+   \item \textbf{Dependências -} conjunto de dependências de IP-cores previstos.
+   % \item \textbf{Notas -} apresenta a lista de notas apresentadas ao longo do documento.
+   % \item \textbf{Referências -} lista de todos os textos referenciados nesse documento.
+  \end{itemize}
+
+  \subsection{Definições}
+  
+  \FloatBarrier
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}[pos]{|m{2.5cm} | m{11.5cm}|} 
+        \hline
+        \cellcolor[gray]{0.9}\textbf{Termo} & \cellcolor[gray]{0.9}\textbf{Descrição} \\ \hline
+        \flushright Requisito Funcional     & Requisitos de hardware que compõem os módulos, descrevendo as ações que o 
+                                    mesmo deve estar apto a executar. Estas informações são capturadas a partir 
+                                    do desenvolvimento dos casos de uso, que documentam as entradas, os processos 
+                                    e as saídas geradas.  \\ \hline
+        \flushright Requisito Não \mbox{Funcional} & Requisitos de hardware que compõem os módulos, representando as características 
+                                    que o mesmo deve ter, ou restrições que o mesmo deve operar. Estas características
+                                    referem-se a técnicas, algoritmos, tecnologias e especificidades do Sistema como um todo.  \\ \hline
+        \flushright Dependências              & Requisitos de reuso de IP-cores, descrevendo as funções que cada um deve exercer. \\ \hline
+      \end{tabular}
+    \end{center}
+  \end{table}  
+
+  % inicio da tabela de acronimos e abreviacoes do documento
+  \subsection{Acrônimos e Abreviações}
+    \FloatBarrier
+    \begin{table}[H]
+      \begin{center}
+        \begin{tabular}[pos]{|m{2cm} | m{12cm}|} 
+          \hline
+          \cellcolor[gray]{0.9}\textbf{Sigla} & \cellcolor[gray]{0.9}\textbf{Descrição} \\ \hline
+          FR      & Requisito Funcional  \\ \hline
+          NFR     & Requisito Não Funcional  \\ \hline
+          D       & Dependência  \\ \hline
+        \end{tabular}
+      \end{center}
+    \end{table}  
+  % fim  
+
+  % inicio da descriao de prioridades de requisitos
+  \subsection{Prioridades dos Requisitos}
+    \FloatBarrier
+    \begin{table}[H]
+      \begin{center}
+        \begin{tabular}[pos]{|m{2cm} | m{12cm}|} 
+          \hline
+          \cellcolor[gray]{0.9}\textbf{Prioridade} & \cellcolor[gray]{0.9}\textbf{Característica} \\ \hline
+          Importante      & Requisito sem o qual o sistema funciona, porém não como deveria.  \\ \hline
+          Essencial       & Requisito que deve ser implementado para que o sistema funcione.  \\ \hline
+          Desejável       & Requisito que não compromete o funcionamento do sistema.  \\ \hline
+        \end{tabular}
+      \end{center}
+    \end{table}  
+  % fim
+
+\section{Requisitos Funcionais}
+
+  \subsection{Interface de Comunicação RS232}
+  
+    \begin{functional}
+      \requirement
+      {Taxa de velocidade de transmissão e recepção (\textit{baud rate})}
+      {O processo de comunicação seria deve ocorrer à uma taxa de transmissão igual a $9600$ bps.}
+      {Essencial}
+
+      \requirement
+      {Modo de operação do controlador RS232}
+      {O controlador serial RS232 opera no modo 8-N-1.}
+      {Essencial}      
+
+      \requirement
+      {Frequência de operação do circuito} 
+      {A frequência de clock do sistema deve ser definida de acordo com a taxa de frequência do oscilador principal do kit FPGA utilizado para prototipação.}
+      {Essencial}   
+
+      \requirement
+      {Padrão de sequência de pacotes para uma operação}
+      {Uma operação é representada pela transmissão de três pacotes de dados na ordem que se segue: (1) código da operação, (2) primeiro operando e (3) segundo operando.}
+      {Essencial}       
+
+    \end{functional}
+
+  \subsection{Interface de Saída}
+  
+    \begin{functional}
+      \requirement
+      {Mecanismo de armazenamento de resultado}
+      {O resultado de uma operação deve ser armazenado em um registrador interno.}
+      {Importante}
+
+      \requirement
+      {Protocolo de saída de dados do resultado}
+      {Os dados devem ser apresentado em sua codificação binária, representada através de um conjunto de LEDs.}
+      {Essencial} 
+
+    \end{functional}  
+
+  \subsection{Conjunto de Operações Aritméticas} 
+  
+    \begin{functional}
+      \requirement
+      {Operação de soma}
+      {O módulo deve ser capaz de realizar a operação de soma de dois valores de 8 bits.}
+      {Essencial}
+
+      \requirement
+      {Operação de subtração}
+      {O módulo deve ser capaz de realizar a operação de subtração de dois valores de 8 bits.}
+      {Essencial}
+
+      \requirement
+      {Operação de multiplicação}
+      {O módulo deve ser capaz de realizar a operação de multiplicação de dois valores de 8 bits. }
+      {Prioridade: Essencial}
+
+      \requirement
+      {Operação de divisão}
+      {O módulo deve ser capaz de realizar a operação de divisão de dois valores de 8 bits.}
+      {Essencial} 
+
+      \requirement
+      {Tamanho da palavra de saída}
+      {O componente deve apresentar uma saída única de 8 bits para todas as operações aritméticas.}
+      {Importante}       
+
+      \requirement
+      {Detecção de overflow aritmético}
+      {O módulo deve ser capaz de detectar \textit{overflow} aritmético.}
+      {Importante}
+    \end{functional}
+
+  \subsection{Conjunto de Operações Lógicas} 
+  
+    \begin{functional}
+      \requirement{Operação AND}
+      {O módulo deve ser capaz de realizar a operação AND lógico de dois operandos de 8 bits.}
+      {Essencial}
+
+      \requirement{Operação OR}
+      {O módulo deve ser capaz de realizar a operação OR lógico de dois operandos de 8 bits.}
+      {Essencial}      
+     
+    \end{functional}    
+
+  \section{Requisitos não Funcionais}
+  Esta seção apresenta a lista de Requisitos não Funcionais do projeto.
+
+  \begin{nonfunctional}
+    \requirement{Transmissão dos dados via porta serial}
+    {Os dados devem ser transmitidos através de uma interface de software dedicada.}
+    {Importante}
+
+  \end{nonfunctional}
+
+\section{Dependências}
+
+  \begin{dependencies}
+    \dependency{Controlador RS232}
+    {Módulo de comunicação serial via protocolo RS232 disponível no repositório OpenCores.}
+
+\end{dependencies}  
+
+% Optional bibliography section
+% To use bibliograpy, first provide the ipprocess.bib file on the root folder.
+% \bibliographystyle{ieeetr}
+% \bibliography{ipprocess}
+
+\end{document}

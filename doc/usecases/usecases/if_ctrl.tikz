@@ -1,0 +1,22 @@
+  \flushleft
+  \begin{tikzpicture} 
+    \begin{umlsystem}[x=0, fill=red!10]{Interface de Comunicação} 
+      \umlactor[x=-5, y=-3]{Controle IF} 
+      \umlactor[x=4, y=-5]{Controle}
+
+      \umlusecase[name=lefunc]{Lê operação}
+      \umlusecase[y=-2, name=leoperandos]{Lê operandos} 
+      % \umlusecase[y=-4, name=saida,width=1.5cm]{Controla saída}
+      \umlusecase[y=-4, name=operacao,width=1.5cm]{Envia operação} 
+      \umlusecase[y=-6, name=operandos,width=1.5cm]{Envia operandos}
+
+      \umlassoc{Controle IF}{lefunc}
+      \umlassoc{Controle IF}{leoperandos}
+      % \umlassoc{Controle IF}{saida}
+      \umlassoc{Controle IF}{operacao}
+      \umlassoc{Controle IF}{operandos}
+      \umlassoc{operacao}{Controle}
+      \umlassoc{operandos}{Controle}
+
+    \end{umlsystem} 
+  \end{tikzpicture} 

@@ -1,0 +1,19 @@
+      \begin{tikzpicture} 
+        \umlclass[type=control]{Interface\_Control}
+        { % atributos
+          + clock : input bit \\
+          + reset : input bit \\
+          + rx\_data\_ready : input bit \\
+          + rx\_data : input bit[8] \\
+          + data\_a : output bit[8] \\
+          + data\_b : output bit[8] \\
+          + operation : output bit[TBD] \\
+          - state : reg bit[TBD] \\
+          - data\_a\_reg : reg bit[8] \\
+          - data\_b\_reg : reg bit[8] \\
+          - operation\_reg : output bit[TBD]
+        }{ % procedures
+          - \underline{<<sequ>> control\_logic()} \\
+          - <<sequ>> register\_assignment()
+        }
+      \end{tikzpicture}

@@ -1,0 +1,11 @@
+    \begin{tikzpicture} 
+      \umlclass[type=interface]{IP\_Interface}
+      { % atributos
+        + clock : input bit \\
+        + reset : input bit \\
+        + rx : input bit \\
+        % + tx : output bit \\
+        + result\_data : output bit[8] \\
+        + overflow : output bit
+      }{}
+    \end{tikzpicture}

@@ -1,0 +1,38 @@
+  \flushleft
+  \begin{tikzpicture} 
+    \begin{umlsystem}[x=0, fill=red!10]{Unidade de Processamento} 
+      \umlusecase[x=-3,y=-5,name=decod]{Decodificar} 
+      \umlusecase[name=soma]{Somar} 
+      \umlusecase[y=-2, name=subtrai]{Subtrair} 
+      \umlusecase[y=-4, name=mult]{Multiplicar} 
+      \umlusecase[y=-6, name=div]{Dividir} 
+      \umlusecase[y=-8, name=and]{AND}
+      \umlusecase[y=-10, name=or]{OR}
+      \umlusecase[x=4,y=-6, width=1.5cm, name=processa]{Processar resultado}   
+      \umlusecase[x=4,y=-3, fill=green!20,width=1cm, name=flags]{Definir flags} 
+
+      \umlactor[x=-6,y=-5]{Controle} 
+      \umlactor[x=7.5,y=-6]{LED de dados} 
+      \umlactor[x=7.5, y=-3]{LED de overflow}   
+
+      \umlassoc{Controle}{decod}
+      \umlassoc{decod}{soma}
+      \umlassoc{decod}{subtrai}
+      \umlassoc{decod}{mult}
+      \umlassoc{decod}{div}
+      \umlassoc{decod}{and}
+      \umlassoc{decod}{or}
+      \umlassoc{processa}{LED de dados}
+      \umlassoc{soma}{flags}
+      \umlassoc{subtrai}{flags}
+      \umlassoc{mult}{flags}
+      \umlassoc{div}{flags}
+      \umlassoc{flags}{LED de overflow}
+      \umlinclude{soma}{processa}
+      \umlinclude{subtrai}{processa}
+      \umlinclude{mult}{processa}
+      \umlinclude{div}{processa}
+      \umlinclude{and}{processa}
+      \umlinclude{or}{processa}
+    \end{umlsystem} 
+  \end{tikzpicture} 

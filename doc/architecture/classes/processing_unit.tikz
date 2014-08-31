@@ -1,0 +1,18 @@
+      \begin{tikzpicture} 
+        \umlclass[type=control]{Processing\_Unit}
+        { % atributos
+          + clock : input bit \\
+          + reset : input bit \\
+          + data\_a : input bit[8] \\
+          + data\_b : input bit[8] \\
+          + operation : input bit[TBD] \\          
+          + result\_data : output bit[8] \\
+          + overflow : output bit \\
+          - enable\_result\_reg : reg bit \\
+          - reult\_reg : reg bit[8]
+        }{ % procedures
+          - \underline{<<comb>> process\_operation()} \\
+          - <<comb>> setup\_flag() \\
+          - <<sequ>> result\_reg\_handler()
+        }
+      \end{tikzpicture}
