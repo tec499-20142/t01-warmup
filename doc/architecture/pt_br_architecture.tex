@@ -57,17 +57,18 @@
   \section{Propósito do Documento}
   Este documento descreve a arquitetura do projeto \ipPROCESSProject, incluindo especificações do circuitos internos e máquinas de estados de cada componente. Ele também apresenta diagramas de classe, definições de entrada e saída e diagramas de temporização.O principal objetivo deste documento é definir as especificações do projeto \ipPROCESSProject e prover uma visão geral completa do mesmo.
 
-  \noindent \textcolor{red}{\textit{Informações adicionais podem ser incluídas nesta seção. Entretanto, via de regra, ela não deve se extender por muitos parágrafos.}}
-
   \section{Stakeholders}
-    \textcolor{red}{\textit{Preencher com as informações e papeis da equipe de desenvolvimento.}}
     \FloatBarrier
     \begin{table}[H] 
       \begin{center}
         \begin{tabular}[pos]{|m{6cm} | m{8cm}|} 
           \hline 
-          \cellcolor[gray]{0.9}\textbf{Nome} & \cellcolor[gray]{0.9}\textbf{Papel/Responsabilidades} \\ \hline
-           &  \\ \hline
+          \cellcolor[gray]{0.9}\textbf{Nome} & \cellcolor[gray]{0.9}\textbf{Papel/Responsabilidades} \\ \hline  
+           \hline Patrick 	& Gerência \\
+           \hline Manuelle Macedo 	& Análise \\
+           \hline Dilan Nery, Lucas Almeida, Mirela Rios, Cabele e Vinícius Santana	& Desenvolvimento \\
+           \hline Antônio Gabriel e Weverson Gomes	& Testes       \\
+           \hline Tarles Walker e Anderson Queiroz 	& Implementação \\ \hline
         \end{tabular}
       \end{center}
     \end{table} 
@@ -112,7 +113,16 @@ O presente documento é apresentado como segue:
 
 \chapter{Visão Geral da Arquitetura}
 
-  \section{Descrição dos Componentes}
+	\section{Restrições}
+	\begin{itemize}
+	\item \textbf{Restrições --} %fazer junto com os desenvolvedores
+	\end{itemize}
+	
+	\section{Codificação dos pacotes de dados}
+	A codificação dos pacotes de dados é de fundamental importância no processo de desenvolvimento
+de uma arquitetura.
+
+	\section{Descrição dos Componentes}
   A unidade de processamento a ser desenvolvida é composta a partir dos seguintes componentes:
 
   \begin{itemize}
