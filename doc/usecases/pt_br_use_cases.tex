@@ -52,7 +52,7 @@
 \section{Introdução}
 
   \subsection{Objetivo}
-  O objetivo desse documento é especificar os casos de uso do projeto \ipPROCESSProject. O documento contempla as seguintes informações: descrição dos Atores envolvidos no processo; definição dos fluxos de eventos principal e secundário; lista de requisitos especiais, funcionais e não funcionais; estabelecimento de pré-condições e pós-condições.
+  O objetivo desse documento é especificar os casos de uso do projeto \ipPROCESSProject. O documento contempla as seguintes informações: descrição dos Atores envolvidos no processo; definição dos fluxos de eventos principal e secundário; lista de requisitos essenciais, funcionais e não funcionais; estabelecimento de pré-condições e pós-condições.
 
   \subsection{Visão Geral do Documento}
   \begin{itemize}
@@ -116,8 +116,7 @@
     \begin{table}[H] 
       \begin{center}
         \begin{tabular}[pos]{|m{2cm} | m{8cm}|} 
-          \hline 
-          \cellcolor[gray]{0.9}\textbf{Termo} & \cellcolor[gray]{0.9}\textbf{Descrição} \\ \hline
+          \hline \cellcolor[gray]{0.9}\textbf{Termo} & \cellcolor[gray]{0.9}\textbf{Descrição} \\ \hline
           UC & Caso de Uso  \\ \hline
           SF & Fluxo Secundário \\ \hline
           FR & Requisito Funcional \\ \hline
@@ -135,8 +134,8 @@
     \begin{tikzpicture} 
       \umlactor{Controle IF} 
       \umlactor[x=2]{Controle}
-      \umlactor[x=4]{LED de dados} 
-      \umlactor[x=6.5]{LED de overflow}  
+      \umlactor[x=4]{LED de overflow} 
+      \umlactor[x=6.5]{LED de dados}  
     \end{tikzpicture} 
   \end{figure}
 
@@ -150,7 +149,7 @@
   \section{Casos de Usos}
 
   \usecase{Unidade de Processamento}
-  A \textbf{Unidade de Processamento} é responśavel por realizar as operações aritméticas e lógicas, de acordo com o código de entrada.
+  A \textbf{Unidade de Processamento} é responsável por realizar as operações aritméticas e lógicas, de acordo com o código de entrada.
   
   \actors
     \begin{description}
@@ -192,7 +191,7 @@
     \end{enumerate}
   \end{secondaryflow}  
 
-  \usecase{Interface de Comunidação}
+  \usecase{Interface de Comunicação}
   A \textbf{Interface de Comunicação} é responsável por estabelecer um mecanismo de interfaceamento entre as unidades de processamento e comunicação.
   
   \actors
