@@ -104,4 +104,3 @@ module ula_duv(input [7:0] data_a, data_b, operation, output logic [7:0] outAlu)
       else
         diff=1'b0;
   endmodule
-
