@@ -32,23 +32,23 @@ initial begin
     #1 reset = 0;
     #1 reset = 1;//Reset
       #5  opcode = 8'b00101011;//opera��o de soma
-      a = 8'd15; //+15
-       b = 8'd10; //+10
-     #10  //=25
+      a = 8'd120; //+120
+       b = 8'd110; //+110
+     #10  //=230
      #4 opcode = 8'b00101011;
       a = 8'd120;//120
-      b = 8'd10;//+10
+      b = 8'd240;//+240
      #10 //Overflow de soma
      #1 reset = 0;
      #1 reset = 1;
      #4 opcode = 8'b00101101;//subtra��o
      a = 8'd125;
      b = 8'd110;
-     #10 //-10
+     #10 //+15
     #1 opcode = 8'b00101101;//subtra��o
-    a = -40;
+    a = 40;
     b = 117;
-    #10 //Overflow de subtra��o
+    #10 //-77
     #1 reset = 0;
     #1 reset = 1;
     #4 opcode = 8'b00101010;//multiplica��o
@@ -57,7 +57,7 @@ initial begin
     #10 //=6
     #4 opcode = 8'b00101010;//multiplica��o
     a = 10;
-    b = 20;
+    b = 30;
     #10 //overflow multiplica��o
     #4 opcode = 8'b00101111;//Divis�o
     a = 15;
@@ -71,6 +71,10 @@ initial begin
     a = 8'b00000001;
     b = 8'b11111110;
     #10 //= b11111111
+    #1 reset = 0;
+    #1  reset = 1;
+    #10
+    
      $finish; //  aguardo 10 unidades de tempo e finalizo o teste
 end
 

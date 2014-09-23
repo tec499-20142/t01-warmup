@@ -12,9 +12,8 @@
 // PURPOSE: Realiza operações lógicas e aritméticas a partir do valor da operação
 // e dos operandos. No fim, armazena o resultado em registradores. Além disso, o
 // modulo trata o overflow. Esse tratamento é feito baseado no resultado da operação
-// que possui 16 bits de saída. Essa saída de 16bits é analisada por um circuito
-// combinacional para verificar se houve um estouro da quantidade de bits desejada (8bits).
-// Para permanecer fiel a arquitetura do projeto, a saída possui 8 bits.
+// que possui 16 bits de saída da ULA. Para permanecer fiel a arquitetura do projeto, 
+// a saída do bloco possui 8 bits.
 // -----------------------------------------------------------------------------
 // REUSE ISSUES
 //   Reset Strategy      : asychronous, active in low level reset.
@@ -25,30 +24,43 @@
 module Processing_Unit(
 	input wire reset,
 	input wire clock,
-	input wire signed [7:0] data_a, 
-	input wire signed [7:0] data_b, 
+	input wire unsigned [7:0] data_a, 
+	input wire unsigned [7:0] data_b, 
 	input wire [7:0] operation,
-	output logic signed[7:0] result_data,
+	output logic unsigned[7:0] result_data,
 	output logic overflow
 );
 
-	reg signed[15:0] result_reg;
-	logic signed[15:0] outAlu;
+	reg [15:0] result_reg = 8'b00000000;
+	reg enable_result_reg = 1'b1;
+	reg [15:0] old_result = 8'b00000000;
+	logic unsigned[15:0] outAlu;
 
 	always_ff @(posedge clock, negedge reset)
 		begin
 			if(~reset) 
 				begin
+				  old_result <= result_reg;
 					result_reg <= 16'd0;
+					enable_result_reg <= 1'b0;
+					result_data <= 8'd0;
 				end
 			else if(clock) 
 			begin
-				result_reg <= outAlu;//Atualiza registrador
-				for(int i = 0; i < 8; i++) 
-				begin
-				  result_data[i] <= result_reg[i];//atualiza saída
-				end
-			end
+			  if(enable_result_reg)
+			    begin
+			      result_reg <= outAlu;//Atualiza registrador
+				    for(int i = 0; i < 8; i++) 
+				      begin
+				      result_data[i] <= result_reg[i];//atualiza saída
+				      end
+				      
+				   end
+				 else if(old_result != outAlu)
+		      begin
+		        enable_result_reg <= 1'b1;
+		      end
+		  end
 		end
 
 		
@@ -70,7 +82,6 @@ module Processing_Unit(
 			default
 					outAlu = 16'd0;
 		endcase
-    
 	  	
 	end
 
@@ -78,8 +89,7 @@ module Processing_Unit(
 	always_comb
 	begin
 		
-		overflow = ((outAlu > 128) 
-		|| (outAlu < -127));
+		overflow = (outAlu > 255);
 
 	end
 
