@@ -23,9 +23,9 @@ module interfaceControl(
 	input reset, 
 	input rx_data_ready, 
 	input [7:0] rx_data, 
-	output [7:0] data_a, 
-	output [7:0]data_b,
-	output [7:0] operation); 
+	output reg [7:0] data_a, 
+	output reg [7:0]data_b,
+	output reg [7:0] operation); 
 	
 	//========interno variaveis=======
 	reg [7:0] data_a_temp; 
@@ -68,9 +68,9 @@ module interfaceControl(
 	 always_ff @(posedge clk)
 		if(reset)
 			begin 
-				data_a <= 8'b00000000; 
-				data_b <= 8'b00000000; 
-				operation <= 8'b000000000; 
+				data_a <= 8'b0; 
+				data_b <= 8'b0; 
+				operation <= 8'b0; 
 			end
 		else if(state == 2'b11)
 			begin
