@@ -31,35 +31,24 @@ module Processing_Unit(
 	output logic overflow
 );
 
-	reg [15:0] result_reg = 8'b00000000;
-	reg enable_result_reg = 1'b1;
-	reg [15:0] old_result = 8'b00000000;
+	reg [15:0] result_reg;
 	logic unsigned[15:0] outAlu;
 
 	always_ff @(posedge clock, negedge reset)
 		begin
 			if(~reset) 
 				begin
-				  old_result <= result_reg;
 					result_reg <= 16'd0;
-					enable_result_reg <= 1'b0;
 					result_data <= 8'd0;
 				end
 			else if(clock) 
 			begin
-			  if(enable_result_reg)
-			    begin
-			      result_reg <= outAlu;//Atualiza registrador
-				    for(int i = 0; i < 8; i++) 
-				      begin
+			   result_reg <= outAlu;//Atualiza registrador
+				 for(int i = 0; i < 8; i++) 
+				    begin
 				      result_data[i] <= result_reg[i];//atualiza saída
-				      end
+				    end
 				      
-				   end
-				 else if(old_result != outAlu)
-		      begin
-		        enable_result_reg <= 1'b1;
-		      end
 		  end
 		end
 
