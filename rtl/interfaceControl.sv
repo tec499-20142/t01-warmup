@@ -23,9 +23,9 @@ module interfaceControl(
 	input reset, 
 	input rx_data_ready, 
 	input [7:0] rx_data, 
-	output reg [7:0] data_a, 
-	output reg [7:0]data_b,
-	output reg [7:0] operation); 
+	output reg[7:0] data_a, 
+	output reg[7:0] data_b,
+	output reg[7:0] operation); 
 	
 	//========interno variaveis=======
 	reg [7:0] data_a_temp; 
@@ -36,7 +36,7 @@ module interfaceControl(
 	
 	/**
 		Um contador de 2 bits. Cada estado determina uma 
-		operaçao da interface control. 
+		operaÃ§ao da interface control. 
 	*/
 	always_ff @(posedge clk)
 		if(reset)
@@ -47,36 +47,32 @@ module interfaceControl(
 			begin 
 				state <= state + 1; 
 			end
-	
-	/**
-		Similiar um mux. Cada estado do contador representa 
-		o registrador adequado para inserir o valor. 
-	*/
-	always_latch
-		case(state)
-			2'b00: operation_temp = rx_data;
-			2'b01: data_a_temp = rx_data; 
-			2'b10: data_b_temp = rx_data;
-			2'b11: ;//Aqui falta a definiçao do estado 2'b11, 
-		endcase
+
 			
 			
 	/***
-		Um bloco para fazer atribuiçao do valor dos registradores temporarios
+		Um bloco para fazer atribuiÃ§ao do valor dos registradores temporarios
 		para os registradores de saida. 
 	*/
-	 always_ff @(posedge clk)
+	 always_ff @(posedge clk) 
 		if(reset)
 			begin 
 				data_a <= 8'b0; 
 				data_b <= 8'b0; 
 				operation <= 8'b0; 
 			end
-		else if(state == 2'b11)
-			begin
-				operation <= operation_temp;
-				data_a <= data_a_temp;
-				data_b <= data_b_temp; 
-			end 
-			
+		else 
+		  begin 
+		    case(state)
+			   2'b00: operation_temp <= rx_data;
+			   2'b01: data_a_temp <= rx_data; 
+			   2'b10: data_b_temp <= rx_data;
+			   2'b11:
+			     begin 
+			       operation <= operation_temp;
+				     data_a <= data_a_temp;
+				     data_b <= data_b_temp; 
+			     end  //Aqui falta a definiÃ§ao do estado 2'b11, 
+		    endcase
+		  end 
 endmodule 
