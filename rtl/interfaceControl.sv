@@ -39,7 +39,7 @@ module interfaceControl(
 		operaÃ§ao da interface control. 
 	*/
 	always_ff @(posedge clk)
-		if(reset)
+		if(!reset)
 			begin
 				state <= 2'b00; 
 			end
@@ -55,7 +55,7 @@ module interfaceControl(
 		para os registradores de saida. 
 	*/
 	 always_ff @(posedge clk) 
-		if(reset)
+		if(!reset)
 			begin 
 				data_a <= 8'b0; 
 				data_b <= 8'b0; 
