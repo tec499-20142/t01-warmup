@@ -30,7 +30,7 @@ architecture Behavioral of uart is
 	-- Constants
 	constant UART_IDLE	:	std_logic := '1';
 	constant UART_START	:	std_logic := '0';
-	constant RST_LVL	:	std_logic := '1';
+	constant RST_LVL	:	std_logic := '0';
 
 	-- Types
 	type state is (idle,data);			-- Stop1 and Stop2 are inter frame gap signals
@@ -146,4 +146,3 @@ begin
 	end process;
 
 end Behavioral;
-
