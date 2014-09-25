@@ -87,15 +87,15 @@ begin
 		wait for (MAIN_CLK_PER*5208);
 		data_from_transceiver	<= data_from_transceiver; --terceiro bit (0)
 		wait for (MAIN_CLK_PER*5208);
-		data_from_transceiver	<= not data_from_transceiver; -- quarto (1)
+		data_from_transceiver	<= data_from_transceiver; -- quarto (0)
 		wait for (MAIN_CLK_PER*5208);
-		data_from_transceiver	<= data_from_transceiver; -- quinto (1)
+		data_from_transceiver	<= data_from_transceiver; -- quinto (0)
 		wait for (MAIN_CLK_PER*5208);
-		data_from_transceiver	<= not data_from_transceiver; -- sexto (0)
+		data_from_transceiver	<= data_from_transceiver; -- sexto (0)
 		wait for (MAIN_CLK_PER*5208);
-		data_from_transceiver	<= not data_from_transceiver; -- setimo (1)
+		data_from_transceiver	<=  data_from_transceiver; -- setimo (0)
 		wait for (MAIN_CLK_PER*5208);
-		data_from_transceiver	<= not data_from_transceiver; -- oitavo (0)
+		data_from_transceiver	<=  data_from_transceiver; -- oitavo (0)
 		wait for (MAIN_CLK_PER*5208);
 		data_from_transceiver	<= not data_from_transceiver; --Stop bit
 		

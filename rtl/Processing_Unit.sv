@@ -9,11 +9,11 @@
 // FILE NAME  : Processing_Unit
 // KEYWORDS 	: ULA, ALU.
 // -----------------------------------------------------------------------------
-// PURPOSE: Realiza operações lógicas e aritméticas a partir do valor da operação
-// e dos operandos. No fim, armazena o resultado em registradores. Além disso, o
-// modulo trata o overflow. Esse tratamento é feito baseado no resultado da operação
-// que possui 16 bits de saída da ULA. Para permanecer fiel a arquitetura do projeto, 
-// a saída do bloco possui 8 bits.
+// PURPOSE: Realiza operaï¿½ï¿½es lï¿½gicas e aritmï¿½ticas a partir do valor da operaï¿½ï¿½o
+// e dos operandos. No fim, armazena o resultado em registradores. Alï¿½m disso, o
+// modulo trata o overflow. Esse tratamento ï¿½ feito baseado no resultado da operaï¿½ï¿½o
+// que possui 16 bits de saï¿½da da ULA. Para permanecer fiel a arquitetura do projeto, 
+// a saï¿½da do bloco possui 8 bits.
 // -----------------------------------------------------------------------------
 // REUSE ISSUES
 //   Reset Strategy      : asychronous, active in low level reset.
@@ -44,12 +44,8 @@ module Processing_Unit(
 			else if(clock) 
 			begin
 			   result_reg <= outAlu;//Atualiza registrador
-				 for(int i = 0; i < 8; i++) 
-				    begin
-				      result_data[i] <= result_reg[i];//atualiza saída
-				    end
-				      
-		  end
+			   result_data <= result_reg[7:0];//atualiza saï¿½da
+		    end
 		end
 
 		

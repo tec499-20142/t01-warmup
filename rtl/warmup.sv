@@ -2,24 +2,25 @@ module warmup(
 input clk,
 input rst,
 input rx,
-output reg result_data,
-output reg overflow
+output reg [7:0] result_data,
+output overflow
 
 );
 
 wire _rx_ready;
-wire _rx_data;
-wire _data_a;
-wire _data_b;
-wire _operation;
+wire [7:0]_rx_data;
+wire [7:0]_data_a;
+wire [7:0]_data_b;
+wire [7:0]_operation;
 
 uart BLOCO1 (
-  .clk (rst),
-  .rst (clk), 
+  .clk (clk),
+  .rst (rst),
   .rx (rx),
   .rx_ready (_rx_ready),
   .rx_data (_rx_data) 
   );
+  
   
  interfaceControl BLOCO2 (
  
@@ -37,11 +38,9 @@ uart BLOCO1 (
 .clock(clk),
 .reset(rst),
 .data_a (_data_a),
-.data_b(_data_a),
+.data_b(_data_b),
 .operation(_operation),
 .result_data(result_data),
 .overflow(overflow)
  );
  endmodule
- 
- 
