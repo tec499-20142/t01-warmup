@@ -28,7 +28,7 @@ module Processing_Unit(
 	input wire unsigned [7:0] data_b, 
 	input wire [7:0] operation,
 	output logic unsigned[7:0] result_data,
-	output logic overflow
+	output reg overflow
 );
 
 	reg [15:0] result_reg;
@@ -73,8 +73,12 @@ module Processing_Unit(
 	
 	always_comb
 	begin
-		
-		overflow = (outAlu > 255);
+		//lógica negativa do botão !! 
+		if (outAlu > 255 )
+			overflow = 0; //acende
+			
+		else
+			overflow = 1; //apaga
 
 	end
 
