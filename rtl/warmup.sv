@@ -2,8 +2,8 @@ module warmup(
 input clk,
 input rst,
 input rx,
-output reg result_data,
-output reg overflow
+output reg[7:0] result_data,
+output overflow
 
 );
 
