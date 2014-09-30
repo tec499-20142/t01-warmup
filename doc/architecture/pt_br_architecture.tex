@@ -25,7 +25,7 @@
 \DocumentTitle{Documento de Arquitetura}
 \Project{Unidade de Operações Aritméticas}
 \Organization{Universidade Estadual de Feira de Santana}
-\Version{Compilação 1.0}
+\Version{Compilação 2.0}
 % Make front cover
 \capa
 %
@@ -39,10 +39,12 @@
     \centering
     \begin{tabular}[pos]{|m{2cm} | m{8cm} | m{4cm}|} 
       \hline
-      \cellcolor[gray]{0.9}
-      \textbf{Date} & \cellcolor[gray]{0.9}\textbf{Descrição} & \cellcolor[gray]{0.9}\textbf{Autor(s)}\\
+      \cellcolor[gray]{0.9} \textbf{Date} & \cellcolor[gray]{0.9}\textbf{Descrição} & \cellcolor[gray]{0.9}\textbf{Autor(s)}\\
       \hline
-      25/06/2014 &  Concepção do documento & joaocarlos \\ \hline
+      25/06/2014 &  Concepção do documento & joaocarlos \\ 
+      \hline
+      25/09/2014 &  Refatoração do documento, revisão ortográfica & manuellemacedo \\ 
+      \hline
     \end{tabular}
   \end{table}
 
@@ -63,12 +65,17 @@
       \begin{center}
         \begin{tabular}[pos]{|m{6cm} | m{8cm}|} 
           \hline 
-          \cellcolor[gray]{0.9}\textbf{Nome} & \cellcolor[gray]{0.9}\textbf{Papel/Responsabilidades} \\ \hline  
-           \hline Patrick 	& Gerência \\
-           \hline Manuelle Macedo 	& Análise \\
-           \hline Dilan Nery, Lucas Almeida, Mirela Rios, Cabele e Vinícius Santana	& Desenvolvimento \\
-           \hline Antônio Gabriel e Weverson Gomes	& Testes       \\
-           \hline Tarles Walker e Anderson Queiroz 	& Implementação \\ \hline
+          \cellcolor[gray]{0.9}\textbf{Nome} & \cellcolor[gray]{0.9}\textbf{Papel/Responsabilidades} \\  
+           \hline 
+           Patrick 	& Gerência \\
+           \hline 
+           Manuelle Macedo 	& Análise \\
+           \hline 
+           Dilan Nery, Lucas Almeida, Mirela Rios, Cabele e Vinícius Santana	& Desenvolvimento \\
+           \hline 
+           Gabriel Santos e Weverson Gomes	& Testes       \\
+           \hline 
+           Tarles Walker e Anderson Queiroz 	& Implementação \\ 				       \hline
         \end{tabular}
       \end{center}
     \end{table} 
@@ -90,45 +97,49 @@ O presente documento é apresentado como segue:
       \begin{center}
         \begin{tabular}[pos]{|m{5cm} | m{9cm}|} 
           \hline
-          \cellcolor[gray]{0.9}\textbf{Termo} & \cellcolor[gray]{0.9}\textbf{Descrição} \\ \hline
-          RS232                & Protocolo de comunicação serial utilizado em aplicações que requerem transmissão de dados entre elementos conectados à um mesmo canal.                    \\ \hline
+          \cellcolor[gray]{0.9}\textbf{Termo} & \cellcolor[gray]{0.9}\textbf{Descrição} \\ 
+          \hline
+          RS232                & Protocolo de comunicação serial utilizado em aplicações que requerem transmissão de dados entre elementos conectados à um mesmo canal.                    \\ 
+          \hline
         \end{tabular}
       \end{center}
     \end{table}  
   % fim
 
   % inicio da tabela de acronimos e abreviacoes do documento
-  \section{Acrônimos e Abreviações}
-    \FloatBarrier
-    \begin{table}[H]
-      \begin{center}
-        \begin{tabular}[pos]{|m{2cm} | m{12cm}|} 
-          \hline
-          \cellcolor[gray]{0.9}\textbf{Sigla} & \cellcolor[gray]{0.9}\textbf{Descrição} \\ \hline
-          TBD      &  To be defined (A ser definido)  \\ \hline
-        \end{tabular}
-      \end{center}
-    \end{table}  
+  %\section{Acrônimos e Abreviações}
+  %  \FloatBarrier
+  %  \begin{table}[H]
+  %    \begin{center}
+  %      \begin{tabular}[pos]{|m{2cm} | m{12cm}|} 
+  %        \hline
+  %        \cellcolor[gray]{0.9}\textbf{Sigla} & \cellcolor[gray]{0.9}\textbf{Descrição} \\ 
+  %        \hline
+  %        TBD      &  To be defined (A ser definido)  \\ 
+  %        \hline
+  %      \end{tabular}
+  %    \end{center}
+  %  \end{table} 
   % fim
 
 \chapter{Visão Geral da Arquitetura}
 
 	\section{Restrições}
-	\begin{itemize}
-	\item \textbf{Restrições --} %fazer junto com os desenvolvedores
-	\end{itemize}
+	As restrições presentes nessa arquitetura se referem a largura dos pacotes de dados que serão executados. Estes devem possuir 8 bits de largura, obedecendo a codificação de valores na faixa de 0 a 255, usando complemento de 2 na operação de subtração. 
+	Novos pacotes de dados, ou seja, uma nova operação só pode ser realizada quando a anterior seja concluída. 
+	
 	
 	\section{Codificação dos pacotes de dados}
-	A codificação dos pacotes de dados é de fundamental importância no processo de desenvolvimento
-de uma arquitetura.
+	A codificação dos pacotes de dados é de fundamental importância no processo de desenvolvimento de uma arquitetura. Sendo assim, serão transmitidos uma sequencia de 3 pacotes de dados na ordem: operação, operando A e operando B com 8 bits cada uma. A codificação feita da interface para os envios do pacotes é feita de acordo a tabela ASCII, onde os números e operadores matemáticos contém 8 bits de codificação cada.
 
 	\section{Descrição dos Componentes}
   A unidade de processamento a ser desenvolvida é composta a partir dos seguintes componentes:
 
   \begin{itemize}
-    \item \textbf{Serial Controller --} Controlador para comunicação com módulo de transmissão serial através do protocolo RS232.
-    \item \textbf{Interface Control --} Interface de controle, responsável por fazer a leitura correta das informações da serial e transmiti-las para a unidade de processamento.
-    \item \textbf{Processing Unit --} Unidade responsável pela realização das operações e armazenamento do resultado.
+    \item \textbf{Serial Controller --} Controlador para comunicação com módulo de transmissão serial através do protocolo RS232. É reutilizado do pacote de open-cores \textit{UART(Universal Asynchronous Receiver/Transmitter) } que funcona da seguinte maneira: identifica a borda de descida do \textit{StarBit}, conta até 8(tamanho do pacote de dados, fica no estado ocioso até o próximo \textit{StartBit}. Os sinais recebido são armazenados em variáveis até a recepção seja completada. Daí então, o estado de \textit{_rx_ready} muda e os sinais são enviados para o Interface Control.
+    \item \textbf{Interface Control --} Interface de controle, responsável por fazer a leitura correta das informações da serial e transmiti-las para a unidade de processamento. Este recebe os pacotes de dados de forma paralela, são quatro estados onde a mudança são feitas a cada rx_data_ready recebido. Estes estados são: aguardando, operação, operando A, operando B.
+    Além disso o INterface Control possui um processo que estabiliza a conexão entre os 'terminais' da conexão da interface RS232, visto que os dois não trabalhm no mesmo clock.
+    \item \textbf{Processing Unit --} Unidade responsável pela realização das operações e armazenamento do resultado. 
   \end{itemize}
 
   \section{Diagrama de Classe (Interface)}
@@ -216,7 +227,7 @@ de uma arquitetura.
           reset\_in                & 1   & entrada   & Sinal de reset geral do sistema.    \\ \hline
           data\_a\_in              & 8   & entrada   & Dado do primeiro operando.    \\ \hline
           data\_b\_in              & 8   & entrada   & Dado do segundo operando.    \\ \hline
-          operation\_in            & TBD   & entrada   & Código da operação.    \\ \hline
+          operation\_in            & 8   & entrada   & Código da operação.    \\ \hline
           result\_data\_out        & 8   & saída     & Representação do resultado da operação. \\ \hline
           overflow\_out            & 1   & saída     & Sinal indicador de overflow aritmético. \\
         \end{longtable}
@@ -269,7 +280,7 @@ de uma arquitetura.
           rx\_data\_in             & 8   & entrada   & Dado proveniente da transmissão.    \\ \hline
           data\_a\_out             & 8   & saída   & Dado do primeiro operando.    \\ \hline
           data\_b\_out             & 8   & saída   & Dado do segundo operando.    \\ \hline
-          operation\_out          & TBD   & saída   & Código da operação.    \\ 
+          operation\_out          &  8   & saída   & Código da operação.    \\ 
         \end{longtable}
       \end{center}    
 
@@ -290,6 +301,7 @@ de uma arquitetura.
         \umltrans[recursive=-160|-120|3cm, recursive direction=right to bottom, arg={counter != 3}, pos=1.5]{read}{read} 
         \end{tikzpicture}    
       \end{figure}
+      
 
     \begin{landscape}
       \subsection{Diagrama de Temporização}
